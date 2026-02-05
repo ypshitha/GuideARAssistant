@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWardrobe - Women's Fashion Sharing Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D4A5A5; /* Soft pink */
+            --primary-light: #FFD1DC; /* Light pink */
+            --secondary: #FFF0F5; /* Lavender blush */
+            --dark: #5D3A3A; /* Dark brown */
+            --light: #FFFFFF;
+            --gray: #E8D5D5; /* Light pinkish gray */
+            --warning: #FFB6C1; /* Light pink */
+            --danger: #FF69B4; /* Hot pink */
+            --accent: #C71585; /* Medium violet red */
+            --success: #77DD77; /* Soft green */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--secondary);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--light);
+            margin-bottom: 40px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 15px 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--light);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: var(--danger);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--light);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light);
+            color: var(--accent);
+        }
+
+        .btn-swap {
+            background-color: var(--success);
+        }
+
+        .btn-swap:hover {
+            background-color: #5cb85c;
+        }
+
+        .btn-rent {
+            background-color: var(--primary);
+        }
+
+        .btn-rent:hover {
+            background-color: #d48a8a;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--accent);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .filter-section {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .filter-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: var(--gray);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--accent);
+            color: var(--light);
+        }
+
+        .wardrobe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .wardrobe-item {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .wardrobe-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            z-index: 2;
+        }
+
+        .swap-badge {
+            background-color: var(--success);
+        }
+
+        .rent-badge {
+            background-color: var(--primary);
+        }
+
+        .wardrobe-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .wardrobe-info {
+            padding: 20px;
+        }
+
+        .wardrobe-category {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--accent);
+            color: var(--light);
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .wardrobe-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .wardrobe-price {
+            font-weight: 600;
+            color: var(--dark);
+            margin: 5px 0;
+        }
+
+        .wardrobe-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .wardrobe-weather {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: var(--dark);
+            margin-top: 10px;
+        }
+
+        .wardrobe-weather i {
+            margin-right: 5px;
+        }
+
+        .upload-section {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .category-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 16px;
+            background-color: var(--light);
+        }
+
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            border: 2px dashed var(--gray);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--accent);
+        }
+
+        .file-upload i {
+            font-size: 48px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .file-upload p {
+            margin-bottom: 10px;
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .listing-options {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .listing-option {
+            flex: 1;
+        }
+
+        .listing-option input {
+            display: none;
+        }
+
+        .listing-option label {
+            display: block;
+            padding: 15px;
+            border: 2px solid var(--gray);
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .listing-option input:checked + label {
+            border-color: var(--accent);
+            background-color: rgba(199, 21, 133, 0.1);
+        }
+
+        .listing-option i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+            color: var(--accent);
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links li {
+            margin: 0 15px;
+        }
+
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .social-icons {
+            margin-bottom: 30px;
+        }
+
+        .social-icons a {
+            color: var(--light);
+            font-size: 20px;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-light);
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Weather specific styles */
+        .sunny { color: var(--warning); }
+        .rainy { color: #87CEEB; }
+        .cold { color: #ADD8E6; }
+        .hot { color: var(--danger); }
+        .cloudy { color: #A9A9A9; }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .hero {
+                height: 400px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .wardrobe-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links li {
+                margin: 5px 10px;
+            }
+
+            .hero {
+                height: 350px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .wardrobe-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wardrobe-actions {
+                flex-direction: column;
+            }
+
+            .wardrobe-actions .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    EcoWardrobe
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#wardrobe">Wardrobe</a></li>
+                    <li><a href="#upload">Upload</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Share, Swap & Rent Women's Fashion</h1>
+                <p>Discover sustainable fashion options through swapping and renting beautiful clothing and accessories.</p>
+                <a href="#wardrobe" class="btn">Browse Collection</a>
+                <a href="#upload" class="btn btn-outline">List Your Items</a>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Unique Items</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">55+</div>
+                        <div class="stat-label">Dress Styles</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">35+</div>
+                        <div class="stat-label">Accessories</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="wardrobe" class="container">
+        <h2 class="section-title">Women's Fashion Collection</h2>
+        
+        <div class="filters">
+            <div class="filter-section">
+                <h3 class="filter-title">Filter by Category</h3>
+                <div class="filter-options">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="dress">Dresses</button>
+                    <button class="filter-btn" data-category="top">Tops</button>
+                    <button class="filter-btn" data-category="bottom">Bottoms</button>
+                    <button class="filter-btn" data-category="outerwear">Outerwear</button>
+                    <button class="filter-btn" data-category="accessory">Accessories</button>
+                    <button class="filter-btn" data-category="jewelry">Jewelry</button>
+                    <button class="filter-btn" data-category="shoes">Shoes</button>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3 class="filter-title">Filter by Weather</h3>
+                <div class="filter-options">
+                    <button class="filter-btn active" data-weather="all">All</button>
+                    <button class="filter-btn" data-weather="sunny"><i class="fas fa-sun sunny"></i></button>
+                    <button class="filter-btn" data-weather="rainy"><i class="fas fa-cloud-rain rainy"></i></button>
+                    <button class="filter-btn" data-weather="cold"><i class="fas fa-snowflake cold"></i></button>
+                    <button class="filter-btn" data-weather="hot"><i class="fas fa-temperature-high hot"></i></button>
+                    <button class="filter-btn" data-weather="cloudy"><i class="fas fa-cloud cloudy"></i></button>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3 class="filter-title">Filter by Availability</h3>
+                <div class="filter-options">
+                    <button class="filter-btn active" data-availability="all">All</button>
+                    <button class="filter-btn" data-availability="swap">For Swap</button>
+                    <button class="filter-btn" data-availability="rent">For Rent</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="wardrobe-grid" id="wardrobeGrid">
+            <!-- Items will be dynamically added here -->
+        </div>
+    </section>
+
+    <section id="upload" class="container">
+        <h2 class="section-title">List Your Items</h2>
+        
+        <div class="upload-section">
+            <form class="upload-form" id="uploadForm">
+                <div class="listing-options">
+                    <div class="listing-option">
+                        <input type="radio" id="list-for-swap" name="listing-type" value="swap" checked>
+                        <label for="list-for-swap">
+                            <i class="fas fa-exchange-alt"></i>
+                            List for Swap
+                        </label>
+                    </div>
+                    <div class="listing-option">
+                        <input type="radio" id="list-for-rent" name="listing-type" value="rent">
+                        <label for="list-for-rent">
+                            <i class="fas fa-calendar-day"></i>
+                            List for Rent
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="itemName">Item Name</label>
+                    <input type="text" id="itemName" class="form-control" placeholder="e.g., Summer Floral Dress" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="itemCategory">Category</label>
+                            <select id="itemCategory" class="category-select" required>
+                                <option value="">Select a category</option>
+                                <optgroup label="Clothing">
+                                    <option value="dress">Dress</option>
+                                    <option value="top">Top</option>
+                                    <option value="bottom">Bottom</option>
+                                    <option value="outerwear">Outerwear</option>
+                                </optgroup>
+                                <optgroup label="Accessories">
+                                    <option value="handbag">Handbag</option>
+                                    <option value="jewelry">Jewelry</option>
+                                    <option value="scarf">Scarf</option>
+                                    <option value="hat">Hat</option>
+                                    <option value="sunglasses">Sunglasses</option>
+                                </optgroup>
+                                <optgroup label="Footwear">
+                                    <option value="shoes">Shoes</option>
+                                    <option value="sandals">Sandals</option>
+                                    <option value="boots">Boots</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="itemWeather">Suitable Weather</label>
+                            <select id="itemWeather" class="category-select" required>
+                                <option value="">Select weather</option>
+                                <option value="sunny">Sunny</option>
+                                <option value="rainy">Rainy</option>
+                                <option value="cold">Cold</option>
+                                <option value="hot">Hot</option>
+                                <option value="cloudy">Cloudy</option>
+                                <option value="all">All Weather</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row" id="price-section" style="display: none;">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="itemPrice">Price per day ($)</label>
+                            <input type="number" id="itemPrice" class="form-control" placeholder="e.g., 15" min="1">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="itemDeposit">Security Deposit ($)</label>
+                            <input type="number" id="itemDeposit" class="form-control" placeholder="e.g., 50" min="0">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Upload Image</label>
+                    <div class="file-upload" id="fileUpload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload or drag and drop</p>
+                        <span>PNG, JPG, JPEG (max. 5MB)</span>
+                        <input type="file" id="itemImage" accept="image/*" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">List Item</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="about" class="container" style="margin-bottom: 60px;">
+        <h2 class="section-title">About EcoWardrobe</h2>
+        <div style="background-color: var(--light); padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+            <p style="margin-bottom: 20px; font-size: 18px;">
+                EcoWardrobe is a sustainable fashion platform where women can swap or rent clothing and accessories. Our mission is to reduce fashion waste by encouraging sharing and reusing beautiful items.
+            </p>
+            <p style="margin-bottom: 20px; font-size: 18px;">
+                Whether you're looking to refresh your wardrobe without buying new clothes or want to earn from items you're not using, EcoWardrobe provides the perfect solution.
+            </p>
+            <p style="font-size: 18px;">
+                Join our community of fashion-conscious women who care about looking great while being kind to the planet.
+            </p>
+        </div>
+    </section>
+
+    <!-- Swap Modal -->
+    <div class="modal" id="swapModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSwapModal">&times;</span>
+            <h3 class="modal-title">Request Swap</h3>
+            <p>You're requesting to swap for: <strong id="swapItemName"></strong></p>
+            <div class="form-group">
+                <label for="swapMessage">Message to Owner</label>
+                <textarea id="swapMessage" class="form-control" rows="4" placeholder="Tell the owner what you'd like to swap and any other details"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Your Items for Swap</label>
+                <div id="userItemsForSwap" class="wardrobe-grid" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
+                    <!-- User's swap items will appear here -->
+                </div>
+            </div>
+            <button class="btn btn-swap" id="confirmSwap">Send Swap Request</button>
+        </div>
+    </div>
+
+    <!-- Rent Modal -->
+    <div class="modal" id="rentModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeRentModal">&times;</span>
+            <h3 class="modal-title">Request Rental</h3>
+            <p>You're requesting to rent: <strong id="rentItemName"></strong></p>
+            <div class="form-row">
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="rentStartDate">Start Date</label>
+                        <input type="date" id="rentStartDate" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="rentEndDate">End Date</label>
+                        <input type="date" id="rentEndDate" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="rentMessage">Message to Owner</label>
+                <textarea id="rentMessage" class="form-control" rows="4" placeholder="Any special requests or notes for the owner"></textarea>
+            </div>
+            <div class="form-group">
+                <p>Total Rental Cost: $<span id="rentalTotal">0</span></p>
+                <p>Security Deposit: $<span id="rentalDeposit">0</span></p>
+            </div>
+            <button class="btn btn-rent" id="confirmRent">Request Rental</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">EcoWardrobe</a>
+            
+            <ul class="footer-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#wardrobe">Wardrobe</a></li>
+                <li><a href="#upload">Upload</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+            </ul>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+            
+            <p class="copyright">&copy; 2025 EcoWardrobe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Comprehensive women's wardrobe data with 50+ items (dresses, accessories, jewelry)
+        const wardrobeData = [
+            // Dresses (15 items)
+            {
+                id: 1,
+                name: "Floral Summer Dress",
+                category: "dress",
+                weather: "sunny",
+                image: "https://images.unsplash.com/photo-1560180279-2baca50fdf68?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                availability: "swap"
+            },
+            { 
+                id: 2,
+                name: "Elegant Maxi Dress",
+                category: "dress",
+                weather: "sunny",
+                image: "https://images.unsplash.com/photo-1583333001978-8c57d752ce5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 20,
+                deposit: 50
+            },
+            {
+                id: 3,
+                name: "Little Black Dress",
+                category: "dress",
+                weather: "all",
+                image: "https://images.unsplash.com/photo-1623609163915-d21853ad7d0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=90",
+                availability: "swap"
+            },
+            {
+                id: 4,
+                name: "Wrap Floral Dress",
+                category: "dress",
+                weather: "sunny",
+                image: "https://images.unsplash.com/photo-1718871729636-887b3d2359ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 15,
+                deposit: 40
+            },
+            {
+                id: 5,
+                name: "Denim Shirt Dress",
+                category: "dress",
+                weather: "cloudy",
+                image: "https://images.unsplash.com/photo-1658747708841-c3c206129a33?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                availability: "swap"
+            },
+            {
+                id: 6,
+                name: "Winter Knit Dress",
+                category: "dress",
+                weather: "cold",
+                image: "https://plus.unsplash.com/premium_photo-1661761129425-bf5cc97bc83a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 25,
+                deposit: 60
+            },
+            {
+                id: 7,
+                name: "Silk Slip Dress",
+                category: "dress",
+                weather: "hot",
+                image: "https://images.unsplash.com/flagged/photo-1585052201332-b8c0ce30972f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=90",
+                availability: "swap"
+            },
+            {
+                id: 8,
+                name: "Pleated Midi Dress",
+                category: "dress",
+                weather: "all",
+                image: "https://images.unsplash.com/photo-1739773375403-36a4ba177f73?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 18,
+                deposit: 45
+            },
+            {
+                id: 9,
+                name: "Silk Blouse",
+                category: "top",
+                weather: "sunny",
+                image: "https://i.etsystatic.com/22221234/r/il/63d218/2526958028/il_500x.2526958028_h2hn.jpg",
+                availability: "swap"
+            },
+            {
+                id: 10,
+                name: "Cashmere Sweater",
+                category: "top",
+                weather: "cold",
+                image: "https://plus.unsplash.com/premium_photo-1705554519628-5d17d796e488?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 12,
+                deposit: 30
+            },
+            {
+                id: 11,
+                name: "Cotton T-Shirt",
+                category: "top",
+                weather: "hot",
+                image: "https://images.unsplash.com/photo-1722310752951-4d459d28c678?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                availability: "swap"
+            },
+            {
+                id: 12,
+                name: "Crop Top",
+                category: "top",
+                weather: "hot",
+                image: "https://images.meesho.com/images/products/393002050/whzvb_512.webp",
+                availability: "rent",
+                price: 10,
+                deposit: 20
+            },
+            {
+                id: 13,
+                name: "Button-Up Shirt",
+                category: "top",
+                weather: "cloudy",
+                image: "https://assets.ajio.com/medias/sys_master/root/20230216/ZRkZ/63ee3e06aeb26924e374d10b/-473Wx593H-443007938-ltpink-MODEL.jpg",
+                availability: "swap"
+            },
+            {
+                id: 14,
+                name: "High-Waisted Jeans",
+                category: "bottom",
+                weather: "all",
+                image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSd97zTYRpfX9L8NjE9Ekafutv0JwKzCTvxPgwrA6vqx-j8t_esMUTMMbtMFj6i2oMbcqDLu53EhBo91qbzIOTT0UtwPNuDNa3Cp9TJz6IRZCKoPdSCPsGLiw&w=500",
+                availability: "rent",
+                price: 15,
+                deposit: 40
+            },
+            {
+                id: 15,
+                name: "Leather Pants",
+                category: "bottom",
+                weather: "cold",
+                image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRQg7xBjs1P5pjgbEPDCVplA3vRnYblInBhPtRaRjBDK9gGC99vfe3Qn_wFN6T4w_i79M47cmLGUUG8XKLTrYl5Hd-6LoQF2aOvn3g08yVqKc6T5gzBE_Lf&w=500",
+                availability: "swap"
+            },
+            {
+                id: 16,
+                name: "Linen Trousers",
+                category: "bottom",
+                weather: "hot",
+                image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRI381uvD0KALe-Mgm_7Pgg_W6spbFJeVzLd2mkOe6O7XrAkGYSd5ywzGm7M0dEnY2PeFhD2vgLq2y8Qx2BKM3HoN9q5ZoOWXEvbv0aCUdrIJ5owZ5vtyx4&w=500",
+                availability: "rent",
+                price: 12,
+                deposit: 30
+            },
+            {
+                id: 17,
+                name: "Wool Winter Coat",
+                category: "outerwear",
+                weather: "cold",
+                image: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSICR29unvd8Yv1jLtUgP3MR6aNL6R8AWtC9Am3PnWQw4df50M2QjF85fCCIFUKRZuiRVllQP17VkOHdoWbCk16_QWR5p-ACH8XvIAcdZztYLXHSs5MX7OLXxQ&w=500",
+                availability: "rent",
+                price: 25,
+                deposit: 80
+            },
+            {
+                id: 18,
+                name: "Rainproof Jacket",
+                category: "outerwear",
+                weather: "rainy",
+                image: "https://shop2india.com/cdn/shop/products/TBD0408703803D_500x.jpg?v=1672377685",
+                availability: "swap"
+            },
+            {
+                id: 19,
+                name: "Denim Jacket",
+                category: "outerwear",
+                weather: "cloudy",
+                image: "https://m.media-amazon.com/images/I/81iiPvmfJvL._SL500_.jpg",
+                availability: "rent",
+                price: 15,
+                deposit: 40
+            },
+            {
+                id: 20,
+                name: "Leather Boots",
+                category: "shoes",
+                weather: "cold",
+                image: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTWUpzcDehR4PE5IdE0Um7VwNdoruYtw4vXkgdHD77O1pRXvlCXDxvHLTktkhsqGq1QRo-rnIsX2kRdjz4vl34lHBM_v9CAjrm8EoBGrd1IaULTVdDzVlsmUA&auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 18,
+                deposit: 60
+            },
+            {
+                id: 21,
+                name: "Strappy Sandals",
+                category: "shoes",
+                weather: "hot",
+                image: "https://assets.ajio.com/medias/sys_master/root/20230821/yMwp/64e3949eafa4cf41f5653ba9/-473Wx593H-466481870-black-MODEL.jpg?auto=format&fit=crop&w=500&q=80",
+                availability: "swap"
+            },
+            {
+                id: 22,
+                name: "White Sneakers",
+                category: "shoes",
+                weather: "all",
+                image: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/b/9/b93d597KJMHukumWhite_1.jpg?auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 12,
+                deposit: 40
+            },
+            {
+                id: 23,
+                name: "Designer Handbag",
+                category: "accessory",
+                weather: "all",
+                image: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRXyhNdKCSwxFluyMmkgZkIafonAC2CNH0Me1GR69Tujfm85u_88RSvLqypjNPt1zC0ncWEDeVccCX8YBPR3v813gq7LJa03itxqmPM634_SWWG2tFm1T-FkBU&auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 20,
+                deposit: 100
+            },
+            {
+                id: 24,
+                name: "Luxury Watch",
+                category: "accessory",
+                weather: "all",
+                image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS6noyRMBY5rHo5Vy-J3rJGzBiVcUpxGOWz_9yje0awG5-10Xx1Fgmw9jlcvak3KfAfwRXdk0CCsaWKNJeRhXIrh1OshTb-gIo-9OfNPA0&auto=format&fit=crop&w=500&q=80",
+                availability: "swap"
+            },
+            {
+                id: 25,
+                name: "Aviator Sunglasses",
+                category: "accessory",
+                weather: "sunny",
+                image: "https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/19164552/2022/8/19/61d10f28-adb8-433b-a624-a0d291b779d61660891896156-Carlton-London-Girls-Pink-Lens--Gold-Toned-Aviator-Sunglasse-6.jpg?auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 10,
+                deposit: 50
+            },
+            {
+                id: 26,
+                name: "Summer Perfume",
+                category: "accessory",
+                weather: "hot",
+                image: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS34VZTkC-hHjR7GiDj82eZqlDW3xnkqZ3BaU5kxfin2TcaIJT1qwoH-FHs5xx-onEoUpWrZHyxacV8dCXuRnpF86mmJfaZRsrCp4GNJKzKQ6xGOY1X066j&auto=format&fit=crop&w=500&q=80",
+                availability: "swap"
+            },
+            {
+                id: 27,
+                name: "Silk Scarf",
+                category: "top",
+                weather: "cloudy",
+                image: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQc6lxAO2mmWFMt6pwMzva7LE0AD9yXDqtXWCBipo7y_Od2Hp1pgIImVQs3PKd0K52_U1Pf6yIQpRxx5zR7s5DYxG2T3tiHyejCUhpw9bSF&auto=format&fit=crop&w=500&q=80",
+                availability: "rent",
+                price: 8,
+                deposit: 20
+            },
+            {
+                "id": 28,
+                "name": "Oversized Blazer",
+                "category": "outerwear",
+                "weather": "cloudy",
+                "image": "https://saltattire.com/cdn/shop/files/1-3BLA-02-1232-1.jpg?v=1744441777&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 37.99
+            },
+            {
+                "id": 29,
+                "name": "Statement Necklace",
+                "category": "jewelry",
+                "weather": "all",
+                "image": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/c/t/ct-nck-44213_f310241a.jpg?auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 30,
+                "name": "Pearl Earrings",
+                "category": "jewelry",
+                "weather": "all",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcT_EaOyrJK4MWyn-pQ1-fKV0TlCMO1ZwNxEacyZFtNd2JhBMNEgPpSGR-Q38Uf9I27Yc8OwtaTRnuJ70MOyQr-zxlojP0rmyQA6jKjDyVp1WwvV7tXmqZB0&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 12.99
+            },
+            {
+                "id": 31,
+                "name": "Gold Hoop Earrings",
+                "category": "jewelry",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSyamhDIKJ7gKWmzWfGvqKDtJdXPwlgkwHd-sf87-bk_p20wZMa5Ipg2QTr6cJsMmkVZ44jhgLKvLd_tRTVd8b7rsc-xGawKl83dVrlM33lOveamzThN-BnZQ&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 16.99
+            },
+            {
+                "id": 32,
+                "name": "Chunky Bracelet",
+                "category": "jewelry",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR9YVMvCSQqKfLasOpGl1gBD9aWCxWnOhcrmuV6JYEfNw6K1M3r9moSkUqlrhtgJJ2bSS1FWgaTRpn310y1xDseOJmV8vLlc3v3x74Oec4&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 33,
+                "name": "Anklet Chain",
+                "category": "jewelry",
+                "weather": "hot",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQSdQ_tJt8uS6bp0hspjuRJmkCv2m2sS25B0NL8RRXsk_lEl3zRQEtJpAtyoX6iIpTjDx550chDTiwvKj9ZN8iIUPpREEM2ZaMcF0eQUmNI&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 34,
+                "name": "Leather Crossbody Bag",
+                "category": "accessory",
+                "weather": "all",
+                "image": "https://www.thestrokesgallery.com/cdn/shop/files/SB022_1.jpg?v=1721805372&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 24.99
+            },
+            {
+                "id": 35,
+                "name": "Mini Skirt",
+                "category": "bottom",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSxfqU1YZ5a0iQ_5RPMdYl6tIVPfwTGxSmLTOpuQtl7G-6L8_wk3L0eAFMSx_mcM04DA2FpfVV7LMwQq17nj-4x2VYynqu95LKL12OZ6yN5&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 36,
+                "name": "Pencil Skirt",
+                "category": "bottom",
+                "weather": "all",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSuygXcGXGlBPajL7fgxAIOQQssK2CD7Bfi22XLuzU3FMkEEul_qtioB8859UfrHF3lWaGb0tVJPLlKwL_15Tipsc9PdSUPxG1_91UQNSY&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 18.99
+            },
+            {
+                "id": 37,
+                "name": "Bodycon Dress",
+                "category": "dress",
+                "weather": "all",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ_boxGkB4GAkqW87UOGmx2cWcK3KckMMHqmZutqQ9AX5e2I1S2DbZMGoO8KO-XYUETXABXWEzh41lg0udAm0rOGEUVUXansosx699flNEScXmrwhx8KQMgLw&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 22.99
+            },
+            {
+                "id": 38,
+                "name": "Peplum Top",
+                "category": "top",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcR7iCnLrTbRjRKhNZc0aJWG0qvfmT81qRUwycehsWDv8PcJ4LD3VgMGBa1ghcg0jJsL5FM12VQyKdt0K5e3_hsXz4vCsK9NGQ&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 39,
+                "name": "Lace Bralette",
+                "category": "top",
+                "weather": "hot",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTYCuwSkVxAQLp-c9gV1-d35449C9NzrS7PTPwsWAtixD5BmQH8IrlsfK7hgLKoUqLrlGUXqkSeJd2JqLhkgmIuE4L6Yvm0Xs1-CjBWxDlZYrm5yAoyNaVE&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 40,
+                "name": "Satin Camisole",
+                "category": "top",
+                "weather": "hot",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRu6GHg92hSpe8_UKEiQasZysgYHy-k5PSGoekHjvjrUjonhaF1qRuiBTlqsrZUF_BL_59AXXxxxTQv-YuZwGPX4s0ab1Jh0FhNwJnjzy0&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 14.99
+            },
+            {
+                "id": 41,
+                "name": "Graphic Hoodie",
+                "category": "top",
+                "weather": "cold",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRpOPGGxP8SMa52GcWdBGEslx_wD7qChUzvdPHTM5iFGn-VSy-ypkRDMvlzYOrerGPl_DI4NERwLfTh9huv7HdaW6h8V4_g7aRN7vHyblkk7UsV3aGPh4ju&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 21.99
+            },
+            {
+                "id": 42,
+                "name": "Puffer Jacket",
+                "category": "outerwear",
+                "weather": "cold",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRfpawoS42O8fdhe_sDJLlrcTL6rLVQnoKuC-AIje9r2mOQUSLaBI_dI8aPVIotG6LZGmEg26PQUnp4jjkMHx3xzgWJMMhKiYgnXMSVj9j66oNFzBs3LlBj5A&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 45.99
+            },
+            {
+                "id": 43,
+                "name": "Trench Coat",
+                "category": "outerwear",
+                "weather": "rainy",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSigyTUAm4qkfMtRX-1dsVnPa69tJH5GhPlMmDE0-w9T2Py-qB5B4W3DMavY9dsYw0rAWlSTV14fvFfAsvVMF2FrB7rTPzq5XBwy3f5Z8KA&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 42.99
+            },
+            {
+                "id": 44,
+                "name": "Faux Fur Vest",
+                "category": "outerwear",
+                "weather": "cold",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSetsjlZJHx0-n_ym_zK9t2uknUcES2cSWnfhCE90i2N_l0zPpCLEdFagyk3HPM_Xvib2sG_x048z1arM4J0TSgxeu5Eyh0H2wBrIBzUCPLQDFHqTJ3pEKpuQ&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 45,
+                "name": "Boho Kimono",
+                "category": "outerwear",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTBrE2hPnrlS65Kuw0cSQDMWLPgZV1Hc6fRGqHa9fjo9eJrxokLrIGYTKqdRMH2OFP1W3YHEBPl8xnIEWMmJ_yJGSJcnxgBzSkjMysugfTSgs3gkylZ5A61&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 46,
+                "name": "Platform Heels",
+                "category": "shoes",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQkiwLeVoz6AZQfjJk7gZGmABfdMhsvQhm1hL5jiz7DnR7JPB9863zlfR6zQSg9Q-WOm-DbXREYAnURL0InvzsI-L2QovwtqZ5Iev33TYdimmaB9aaC-nBlkm4&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 32.99
+            },
+            {
+                "id": 47,
+                "name": "Ankle Strap Heels",
+                "category": "shoes",
+                "weather": "all",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRlFTuOH71P1xZOlubJgWllCM4jKVyIknZqwKFYLByl0syflq8_vOzy6ZrjxXf1re8V8OQN-KqVJ3rc6Ogph8cE7wv1iAMmgIOUp1oUzPxWUhn5v7vL2S0mWxk&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 48,
+                "name": "Ballet Flats",
+                "category": "shoes",
+                "weather": "all",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQt9W_MZnH4C2W8eyWfTYaYJjIPNHqZ_93yVKtCJeXNce3hlb7FvchI5rSW5F_WJ7J94nTmjAqHDv6HQpVGRpqxdjgIOaQXZMx00rbsInTU9Ys--JErVkJ1jg&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 19.99
+            },
+            {
+                "id": 49,
+                "name": "Combat Boots",
+                "category": "shoes",
+                "weather": "rainy",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRTsNXqukbI4L577vTUQB9ogZIT8MET7wvCmcRCU5U-6ihcF3u9lsniFq_hAF4aBs6PtFBXTFPpdc656XpSr-n97EgCx-KYHuEbd5UUhSo0b-jYgt9WvIVvcw&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 38.99
+            },
+            {
+                "id": 50,
+                "name": "Wedge Sandals",
+                "category": "shoes",
+                "weather": "hot",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQPnhRvWvNf1uUbvMlfY-mhKcVn-HMzPhNDVn6jMM8JCaaj-E_hR--OglUZ9tGkF_SoJmpPiqR5cpkCsYJoVUV834wE4tR2kRYa-PZuDC4&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 51,
+                "name": "Espadrilles",
+                "category": "shoes",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRHOBWveoF212PzYQgMUhZRVEdIoGXcwFh07dScTQCQDRjdnjGaiNBWzzPqT1OBE2_qdCysKWshV2kGrYvQKoDH1GixCE508s66263OIrJ4&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 52,
+                "name": "Running Shoes",
+                "category": "shoes",
+                "weather": "all",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSa8AGC0aSph2QhvGpktF9xz2LAXOOiT93FMEzzaR6XDUXa0UdTHChCPCn6_kT2987UboMm-LF_7Ej3BOBB9a1I75qOebA3YSXUxrGw9uvsNQ596pB54aW35TE&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 29.99
+            },
+            {
+                "id": 53,
+                "name": "Loafers",
+                "category": "shoes",
+                "weather": "cloudy",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRTwRuXWvhC9Xn5k8y73k4uR5PuBgO6dXF3Gs-4FBAtu8hZlIErVdnzE_303syCHgK0klNr4xk1qsRzKXXLPmQanibGV0kZc88DVQlv4P22Xzc2OKSLIHVS&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 24.99
+            },
+            {
+                "id": 54,
+                "name": "Oxford Shoes",
+                "category": "shoes",
+                "weather": "all",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSFNKEtGPPbhp5fL_M4jadneTzNbmeocDfKwnmZ-SVnWIE3dPVThw-UjJkCnb4RW6ssFirA-YUoKB03Bc4VsX8abxmyVE08qd_1nXxy0-uS4nAPaE8rbOlXpg&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 34.99
+            },
+            {
+                "id": 55,
+                "name": "Fedora Hat",
+                "category": "accessory",
+                "weather": "sunny",
+                "image": "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/c/5/c50fb34HT010068_1.jpg?rnd=20200526195200&tr=w-1080&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 56,
+                "name": "Beanie",
+                "category": "accessory",
+                "weather": "cold",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSzUnLxTChu387vfRn6UlJXgiD4stD8InFvKRmf19T_rydi_BtqOTfJE3GtUyZPwCdzNzKqxwbPw6PBtX-wY9wJfkiQWFGy0_ietIlh_Au1h7LMWJq2rEPGHg&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 57,
+                "name": "Wide Brim Hat",
+                "category": "accessory",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRYmmtNJ_0ZtSqzYTXElF2IErlJYSN5AFfXaQQqXclkc6WcZx-CFytbzeyqzm4wKepaTxQ2mRZsDEaG0krKMDWVhpLpQJrbgLMeKdw_MbA&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 16.99
+            },
+            {
+                "id": 58,
+                "name": "Beret",
+                "category": "accessory",
+                "weather": "cloudy",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSlUJUio2Lxn06jz_RzurHM5kAY0K4JfnDaSJKmJoMtxfdGUo6O9aJPQTwt2Y6Actc3CLz8oxzdLUfW4KwJSrb_0BO9Bq2dl8QTslupKEWspG3BHhTVYzR6KQ&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 59,
+                "name": "Bucket Hat",
+                "category": "accessory",
+                "weather": "rainy",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRSYgjxuk2STZZBEuiJWnS6jhfc1cV9pXc1M7b94pxLgUZGEPA9Ji2HNIprERSAy8xKfKMDqFdf959us7X87A2L19NWg_-xltSO0PvEXpE&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 12.99
+            },
+            {
+                "id": 60,
+                "name": "Leather Belt",
+                "category": "accessory",
+                "weather": "all",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRztll1ruRkLTMHBVNI2gp5OjG3co5RCNNyfZIBwobYgWewaoc6XaPr4uAyZZcDEso1K5Os_WgaN43dF_oq5LKK7NP2__Fer6mKsAp8iV1-xVV-4WxMJNeH&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 61,
+                "name": "Corset Belt",
+                "category": "accessory",
+                "weather": "all",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQo4HtLZv-gvNkNdxsNniV0uC6f5KLt0o0OOE2CJjtinfe-8AkMX5uowsKgHb3NH7Jo2EgpMIt4r9xYdLTIbOLRwqOWTUyMLgzq6JAPwSs&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 17.99
+            },
+            {
+                "id": 62,
+                "name": "Tulle Skirt",
+                "category": "bottom",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRpGlEIJO3Xkeko8qMOclI-ZcoH8gcHWQEqJv-QGfFzygm3KYDvB6TDUWp3RQeEDx4FvJgVZBg0hQU1crzofmjCRHHP0eJWDGTND4-IJqcz2bBWw34nNY7d&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 63,
+                "name": "Ripped Skinny Jeans",
+                "category": "bottom",
+                "weather": "cloudy",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRE8acCy81sN9HmhHryeNnRAviduWcWrakWumoBiEtN1iGFBQ9l4oDR_LKJzoBSF3a5sDq3bAewR0LW8YG0h3FH8Y1-o9rXnFHVa7-RsDf2&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 26.99
+            },
+            {
+                "id": 64,
+                "name": "Cargo Pants",
+                "category": "bottom",
+                "weather": "all",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSmKJ3RqZ7kBJi2uQtH8U4G2rAaXSarTbmIm2hYVdjRaJZC_JoQyt86YmUPtt8i2qZdmfhZZTWOj0YVpPJRw18jcx9v81rp47OAP_z-_aVBvGP9944UxscM&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 65,
+                "name": "Corduroy Overalls",
+                "category": "bottom",
+                "weather": "cold",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQLgMKO6tHQ6ihZODPgxQ2CETJsuy_r09j9hWYT5DQvUHGOeb81dP7VJWWw13aAcnuIBukYO7z-oic20_sOLnRTvG-8hCpw2XT06E-NzIw&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 31.99
+            },
+            {
+                "id": 66,
+                "name": "Sequin Dress",
+                "category": "dress",
+                "weather": "all",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTl6kdqJSDg1j1dBalqAyhG3bIIT8toBd6YJRuSdh7IZzA5thtoPbvLB3_6JTmox-JeSsLqGcBeCKQeOOuRvKjQR4ajgG07G7_oytTn-sQY5A7u8x0RKWI8&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 39.99
+            },
+            {
+                "id": 67,
+                "name": "Halter Neck Top",
+                "category": "top",
+                "weather": "hot",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT-STES8_kCFZbbwQ1-UtO3fdBQ0WG3MbU0hFCWiau7oOsL4eeGMtXNvKKwtqNG9Q9vTNeGnRZJ19GrVnNkTMo7Z_l07UqPXZqfB8Bk1RDYsrF-Z2mc_Ul3Kw&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 18.99
+            },
+            {
+                "id": 68,
+                "name": "Cropped Hoodie",
+                "category": "top",
+                "weather": "cold",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTMGAvNX5N_o5auf8Q5-OHdyNOLqGi_VLeA9FzpbfhHTtZ-AQzlktErI1ROOzRzAahy5BDb7z1Qr4te4slvr4g-uwAI-kpnm4pgnLoF5eyZfZnsVEFjYJSCyaqb&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 69,
+                "name": "Faux Leather Jacket",
+                "category": "outerwear",
+                "weather": "cloudy",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQTmfM2jM6ScGDvb4_c2V_i_AjWdQr4thPMR8D4-l417X50kBBWlcxpXk2fgluQvJNLrbQy9CQ7DZ4pb5oYVOPngN0u2rC86yTA-E-inRVpc3gpc-Inbsmu-Q&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 41.99
+            },
+            {
+                "id": 70,
+                "name": "Sheer Blouse",
+                "category": "top",
+                "weather": "hot",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRhzo2Oaxz84j9RESC1LcKqxzVZNlazD8Li7-r-PA9ak2S7nwdPGR9Vc16ApSV7GFEWKFRsF3px-jSIUyMMx1J4dFriLn1F-FtsZ_PzpHLU0cS0P9g8ZJBWX60&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 71,
+                "name": "Embroidered Kurti",
+                "category": "top",
+                "weather": "all",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSVppt7yRQn4qYQ7P2WDfNQLx0xdHvM4FBUfpxH_9QBw94XIQwqaC9ljNrZ0HxtHPkHTfF0h084leuGfUJ1gwePPI-IB0YpU00MSoMt9LU&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 72,
+                "name": "Chiffon Dupatta",
+                "category": "accessory",
+                "weather": "all",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR2hejQxkp0Y8WZZ6PQzMd_WXzaIL7q9HCT5M0_rBw1ncTE5dGMGWMLHQnsj5d7KpW2uVVIYRxn2SWPpgiJfQB81ezwDyEdIp8tsD8UnBbP&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 73,
+                "name": "Silk Saree",
+                "category": "dress",
+                "weather": "all",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQcn144Uha4boRR6CqhfBKwAqwdxAkH915uYASZjZMHUYFkgn5X4n7RMgau1MzL3f7r3imtGhcEEhVPu2NcPyAo5urCCpJGW2yRPurkiQN7ERCKppifbyNeXQ&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 49.99
+            },
+            {
+                "id": 74,
+                "name": "Jumpsuit",
+                "category": "dress",
+                "weather": "all",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQMzgqKd_C2u-o_QKlCnkjhc_Jy4XoDtZXRynhRGDE5jHto7vAocWmyp2mROptpu5V5rGJ9_paIOe2EyGzw4Z7o_NfbQET67j4Dy1PWz0hY8-blDEI0mke8&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 32.99
+            },
+            {
+                "id": 75,
+                "name": "Romper",
+                "category": "dress",
+                "weather": "sunny",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTWR-g5hHF6U7ztivMGBn0WwJ7UUT08WuihAPD272p_5e0mMC7f5aoQbWVFZ74Hbmwtmb7PggVZipdNV7Wkhpwwtbb5JoLw9YKdvfXHO8YwNt3ZWbQ2JrQgb6Q&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 76,
+                "name": "Tie-Dye T-Shirt",
+                "category": "top",
+                "weather": "hot",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTIA9SaXeUBEWmHPfvaL9BogByXpGkoXECrlwYSqlzcnd2HFA-5Ow5ytYkJfWO62GtmNvJBaai0je6diJ9GsT2iG3td5trEnhj-rwRMZf7sNH_Xopk-aU_L&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 77,
+                "name": "Cashmere Beanie",
+                "category": "accessory",
+                "weather": "cold",
+                "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSd78vXX1MEerGJ0mq1Tj5n-Z8kD-g8d15tn2bHU9-wsSfda99EjNJRyYJ34B_xD2IlAxsKMvZnAQoxezFBfAcZ6VWyn3TQLjC1OmjR95cGwVdoPSmd3mJZSEo&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 78,
+                "name": "Knitted Leg Warmers",
+                "category": "accessory",
+                "weather": "cold",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQSOw0WZNNz5i6tkglB3snWDsPH02CXHcj5_429Vv3KgJwEW-11LuI1NAJ0Df8VJLQoNUUmxeKMp4AerESwUfR_UMF09Um2GSudvAVuV9KdwNGyPJim9-nCMw&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 11.99
+            },
+            {
+                "id": 79,
+                "name": "Fingerless Gloves",
+                "category": "accessory",
+                "weather": "cold",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT0omiVjsDaSrg_MqQBmRzc0vJTAL0r7ZZvEwdDFxNiLD4CcObRT5nY-bnGouBnNUp1a9Y1yoDXHosUWTOb_xgqOkvLVmI8TfvJvICmmuyn&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 80,
+                "name": "Statement Ring",
+                "category": "jewelry",
+                "weather": "all",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQVObEnHQj4HJ--QLA2GqwsWZ0WVN1Ser0x2xSESQEK4fwsRaR4yQpHMnedvmfN64nsdAw6QTKKoBI-05MYDFE4_OOzPDxB_o910oM-8fc&auto=format&fit=crop&w=500&q=80",
+                "availability": "swap"
+            },
+            {
+                "id": 81,
+                "name": "Tennis Bracelet",
+                "category": "jewelry",
+                "weather": "all",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSWrvGZZnm0KxZpDFyjNe_i71bNvLZsFf2XJZxTedCrGwdtRpyk3Lqz0bnrYm3izn7JGALktCcNPHLDrh5zyQ5mdT__xsBwo3uw_FQ4j_LEnIt-xSL5-9PTRA&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 29.99
+            },
+            {
+                "id": 82,
+                "name": "Brooch Pin",
+                "category": "accessory",
+                "weather": "all",
+                "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQ3lGaKPzjvujfjAXvCz0UJOn0EfPGD-SqRd9hbjhTQKcTie-Be8DRLvbp_Ido8ZxwSEUYV1TiNTVckDFX81umCQdYcetm8tzr2W2sqS9GAIJxS-2-I91kWXQ&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 14.99
+            },
+            {
+                "id": 83,
+                "name": "Clutch Purse",
+                "category": "accessory",
+                "weather": "all",
+                "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQCEVceb2-T_L8-o_FYRGzJpSETj-txv3I_FrCPoPp2jZtOJ68lX9yJGeTA-nGhcF8TmHwZTTdubrYmEgJyo6m7Z9OrOkh4ugnYtPXCSa5M&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 22.99
+            },
+            {
+                "id": 84,
+                "name": "Quilted Shoulder Bag",
+                "category": "accessory",
+                "weather": "all",
+                "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQyei2uHu1hQq27MNMn7Nj_UnnHDoodxw4txEsQqcfKijlaVvhw3R93XlgK0cE2FCw5jR_xAiJNpK4ypoBZOO-t6U4JVFBjYm5SB-FaBsQkLehxbrCY4JaMwA&auto=format&fit=crop&w=500&q=80",
+                "availability": "rent",
+                "price": 34.99
+            }
+        ];
+
+        // DOM elements
+        const wardrobeGrid = document.getElementById('wardrobeGrid');
+        const uploadForm = document.getElementById('uploadForm');
+        const fileUpload = document.getElementById('fileUpload');
+        const itemImage = document.getElementById('itemImage');
+        const priceSection = document.getElementById('price-section');
+        const listingTypeRadios = document.querySelectorAll('input[name="listing-type"]');
+        const swapModal = document.getElementById('swapModal');
+        const rentModal = document.getElementById('rentModal');
+        const closeSwapModal = document.getElementById('closeSwapModal');
+        const closeRentModal = document.getElementById('closeRentModal');
+        const swapItemName = document.getElementById('swapItemName');
+        const rentItemName = document.getElementById('rentItemName');
+        const userItemsForSwap = document.getElementById('userItemsForSwap');
+        const rentalTotal = document.getElementById('rentalTotal');
+        const rentalDeposit = document.getElementById('rentalDeposit');
+        const rentStartDate = document.getElementById('rentStartDate');
+        const rentEndDate = document.getElementById('rentEndDate');
+
+        // Current filter states
+        let currentCategory = 'all';
+        let currentWeather = 'all';
+        let currentAvailability = 'all';
+
+        // Display wardrobe items with filters
+        function displayWardrobeItems() {
+            wardrobeGrid.innerHTML = '';
+            
+            const filteredItems = wardrobeData.filter(item => {
+                return (currentCategory === 'all' || item.category === currentCategory) &&
+                       (currentWeather === 'all' || item.weather === currentWeather) &&
+                       (currentAvailability === 'all' || item.availability === currentAvailability);
+            });
+            
+            if (filteredItems.length === 0) {
+                wardrobeGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No items found matching your filters.</p>';
+                return;
+            }
+            
+            filteredItems.forEach(item => {
+                const weatherIcons = {
+                    sunny: 'fa-sun',
+                    rainy: 'fa-cloud-rain',
+                    cold: 'fa-snowflake',
+                    hot: 'fa-temperature-high',
+                    cloudy: 'fa-cloud',
+                    all: 'fa-calendar-alt'
+                };
+                
+                const weatherClass = item.weather;
+                const badgeType = item.availability === 'swap' ? 'swap-badge' : 'rent-badge';
+                const badgeText = item.availability === 'swap' ? 'Swap' : 'Rent';
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'wardrobe-item';
+                itemElement.innerHTML = `
+                    <div class="item-badge ${badgeType}">${badgeText}</div>
+                    <img src="${item.image}" alt="${item.name}" class="wardrobe-img">
+                    <div class="wardrobe-info">
+                        <span class="wardrobe-category">${item.category}</span>
+                        <h3 class="wardrobe-title">${item.name}</h3>
+                        ${item.availability === 'rent' ? `<div class="wardrobe-price">$${item.price}/day</div>` : ''}
+                        <div class="wardrobe-weather">
+                            <i class="fas ${weatherIcons[item.weather]} ${weatherClass}"></i>
+                            ${item.weather === 'all' ? 'All Weather' : item.weather.charAt(0).toUpperCase() + item.weather.slice(1)}
+                        </div>
+                        <div class="wardrobe-actions">
+                            ${item.availability === 'swap' ? 
+                                `<button class="btn btn-swap" data-id="${item.id}">Request Swap</button>` : 
+                                `<button class="btn btn-rent" data-id="${item.id}">Rent Now</button>`}
+                        </div>
+                    </div>
+                `;
+                
+                wardrobeGrid.appendChild(itemElement);
+            });
+
+            // Add event listeners to swap/rent buttons
+            document.querySelectorAll('.btn-swap').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const itemId = parseInt(e.target.getAttribute('data-id'));
+                    openSwapModal(itemId);
+                });
+            });
+
+            document.querySelectorAll('.btn-rent').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const itemId = parseInt(e.target.getAttribute('data-id'));
+                    openRentModal(itemId);
+                });
+            });
+        }
+
+        // Open swap modal
+        function openSwapModal(itemId) {
+            const item = wardrobeData.find(i => i.id === itemId);
+            if (!item) return;
+            
+            swapItemName.textContent = item.name;
+            
+            // Display user's items for swap
+            userItemsForSwap.innerHTML = '';
+            userItems.forEach(userItem => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'wardrobe-item';
+                itemElement.innerHTML = `
+                    <img src="${userItem.image}" alt="${userItem.name}" class="wardrobe-img">
+                    <div class="wardrobe-info">
+                        <span class="wardrobe-category">${userItem.category}</span>
+                        <h3 class="wardrobe-title">${userItem.name}</h3>
+                    </div>
+                `;
+                userItemsForSwap.appendChild(itemElement);
+            });
+            
+            swapModal.style.display = 'flex';
+        }
+
+        // Open rent modal
+        function openRentModal(itemId) {
+            const item = wardrobeData.find(i => i.id === itemId);
+            if (!item) return;
+            
+            rentItemName.textContent = item.name;
+            rentalTotal.textContent = item.price;
+            rentalDeposit.textContent = item.deposit;
+            
+            // Set default dates (today + 3 days)
+            const today = new Date();
+            const endDate = new Date();
+            endDate.setDate(today.getDate() + 3);
+            
+            rentStartDate.valueAsDate = today;
+            rentEndDate.valueAsDate = endDate;
+            
+            rentModal.style.display = 'flex';
+        }
+
+        // Close modals
+        closeSwapModal.addEventListener('click', () => {
+            swapModal.style.display = 'none';
+        });
+
+        closeRentModal.addEventListener('click', () => {
+            rentModal.style.display = 'none';
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === swapModal) {
+                swapModal.style.display = 'none';
+            }
+            if (e.target === rentModal) {
+                rentModal.style.display = 'none';
+            }
+        });
+
+        // Calculate rental cost when dates change
+        rentStartDate.addEventListener('change', calculateRentalCost);
+        rentEndDate.addEventListener('change', calculateRentalCost);
+
+        function calculateRentalCost() {
+            const startDate = new Date(rentStartDate.value);
+            const endDate = new Date(rentEndDate.value);
+            
+            if (startDate && endDate && startDate <= endDate) {
+                const item = wardrobeData.find(i => i.name === rentItemName.textContent);
+                if (item) {
+                    const diffTime = Math.abs(endDate - startDate);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Include both start and end day
+                    const totalCost = diffDays * item.price;
+                    rentalTotal.textContent = totalCost;
+                }
+            }
+        }
+
+        // Handle listing type change (swap/rent)
+        listingTypeRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'rent') {
+                    priceSection.style.display = 'flex';
+                } else {
+                    priceSection.style.display = 'none';
+                }
+            });
+        });
+
+        // Handle form submission
+        uploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const listingType = document.querySelector('input[name="listing-type"]:checked').value;
+            const itemName = document.getElementById('itemName').value;
+            const itemCategory = document.getElementById('itemCategory').value;
+            const itemWeather = document.getElementById('itemWeather').value;
+            const file = itemImage.files[0];
+            
+            if (!file) {
+                alert('Please upload an image');
+                return;
+            }
+            
+            // In a real app, you would upload the image to a server
+            // For this demo, we'll use a placeholder and add the item to our array
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const newItem = {
+                    id: wardrobeData.length + 1,
+                    name: itemName,
+                    category: itemCategory,
+                    weather: itemWeather,
+                    image: e.target.result,
+                    availability: listingType
+                };
+                
+                if (listingType === 'rent') {
+                    const itemPrice = parseFloat(document.getElementById('itemPrice').value);
+                    const itemDeposit = parseFloat(document.getElementById('itemDeposit').value);
+                    
+                    if (isNaN(itemPrice) || itemPrice <= 0) {
+                        alert('Please enter a valid price');
+                        return;
+                    }
+                    
+                    newItem.price = itemPrice;
+                    newItem.deposit = isNaN(itemDeposit) ? 0 : itemDeposit;
+                }
+                
+                wardrobeData.push(newItem);
+                displayWardrobeItems();
+                
+                // Reset form
+                uploadForm.reset();
+                fileUpload.querySelector('p').textContent = 'Click to upload or drag and drop';
+                priceSection.style.display = 'none';
+                
+                // Scroll to wardrobe section
+                document.getElementById('wardrobe').scrollIntoView({ behavior: 'smooth' });
+                
+                alert('Item listed successfully!');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Handle file upload
+        fileUpload.addEventListener('click', () => {
+            itemImage.click();
+        });
+
+        itemImage.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const fileName = e.target.files[0].name;
+                fileUpload.querySelector('p').textContent = fileName;
+            }
+        });
+
+        // Filter buttons functionality
+        document.querySelectorAll('[data-category]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-category]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.getAttribute('data-category');
+                displayWardrobeItems();
+            });
+        });
+
+        document.querySelectorAll('[data-weather]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-weather]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentWeather = btn.getAttribute('data-weather');
+                displayWardrobeItems();
+            });
+        });
+
+        document.querySelectorAll('[data-availability]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-availability]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentAvailability = btn.getAttribute('data-availability');
+                displayWardrobeItems();
+            });
+        });
+
+        // Confirm swap/rent actions
+        document.getElementById('confirmSwap').addEventListener('click', () => {
+            alert('Swap request sent successfully!');
+            swapModal.style.display = 'none';
+        });
+
+        document.getElementById('confirmRent').addEventListener('click', () => {
+            alert('Rental request sent successfully!');
+            rentModal.style.display = 'none';
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            displayWardrobeItems();
+            
+            // Set minimum date for rental to today
+            const today = new Date().toISOString().split('T')[0];
+            rentStartDate.setAttribute('min', today);
+            rentEndDate.setAttribute('min', today);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
